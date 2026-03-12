@@ -72,12 +72,12 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(2.5rem, 6vw, 4.25rem); /* Scaled up for Premium Look */
   font-family: var(--serif);
   font-weight: 600;
   font-style: italic;
-  line-height: 1.1;
-  margin-top: 0.5rem;
+  line-height: 1.05;
+  margin-top: 0.75rem;
 }
 
 .label {
@@ -1641,8 +1641,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 @media (max-width: 680px) {
   :root { --pad: 1.25rem; --sec: 4rem; }
   
-  .section-header { margin-bottom: 3rem; text-align: center; }
-  .heading-section { font-size: 2.5rem; }
+  .section-header { margin-bottom: 3.5rem; text-align: center; width: 100%; max-width: none !important; }
+  .heading-section { font-size: clamp(2.8rem, 10vw, 4rem); font-weight: 800; line-height: 1; }
   
   .products__grid,
   .product-grid { 
@@ -1653,26 +1653,37 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 
 @media (max-width: 480px) {
   :root { --pad: 1rem; --sec: 3.5rem; }
-  .heading-section { font-size: 2.1rem; }
-  .hero-title { font-size: 2.3rem; }
+  .heading-section { font-size: 2.4rem; letter-spacing: -0.03em; }
+  .hero-title { font-size: 2.5rem; }
 
   /* Auth */
   .auth-section { padding-top: 80px; }
-  .auth-box { padding: 2rem 1.25rem; border-radius: var(--r-md); }
+  .auth-box { padding: 2.5rem 1.25rem; border-radius: var(--r-md); }
   
   /* Cart */
-  .cart-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .cart-item__info { width: 100%; }
-  .qty-selector { align-self: flex-start; }
+  .cart__layout, .checkout__layout { gap: 2rem; }
+  .cart-item { 
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.5rem 0;
+  }
+  .cart-item__img { width: 80px; height: 100px; }
+  .cart-item__info { grid-column: 2; }
+  .qty-selector { margin-top: 0.75rem; }
   
   /* Contact */
-  .contact__grid { gap: 2.5rem !important; }
-  .contact__form { padding: 2rem 1.25rem !important; }
-  .contact__form form div { grid-template-columns: 1fr !important; }
+  .contact__grid { display: block !important; }
+  .contact__info { margin-bottom: 3rem; }
+  .contact__card { padding: 2rem 1.5rem !important; }
+  .contact__form { padding: 2.5rem 1.5rem !important; border-radius: var(--r-md); }
+  .contact__form form div { display: block !important; }
+  .contact__form .form-group { margin-bottom: 1.5rem; }
 
   /* Menu */
-  .mobile-nav__links { padding: 2rem 1.5rem; }
-  .mobile-nav__link { font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .mobile-nav__links { padding: 3rem 1.5rem; }
+  .mobile-nav__link { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; }
 }
 
 /* NO animations on mobile for performance */
