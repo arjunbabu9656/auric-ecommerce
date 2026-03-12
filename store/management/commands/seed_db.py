@@ -8,6 +8,24 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('🚀 Starting Production Database Seed...'))
 
+        # ── Persistent Admin Creation (Render Fix) ──
+        import os
+        from django.contrib.auth.models import User
+        # Get password from environment variable OR use a default if not set
+        admin_pass = os.environ.get('ADMIN_PASSWORD', 'Auric@2026')
+        
+        u = User.objects.filter(username='arjunaju').first()
+        if not u:
+            User.objects.create_superuser('arjunaju', 'arjunb7025@gmail.com', admin_pass)
+            self.stdout.write(self.style.SUCCESS(f'  Admin: Re-created arjunaju superuser.'))
+        else:
+            # Always ensure the password is what's in the Env Variable
+            u.set_password(admin_pass)
+            u.is_superuser = True
+            u.is_staff = True
+            u.save()
+            self.stdout.write(self.style.SUCCESS(f'  Admin: Updated arjunaju password.'))
+
         # ── Categories ──
         cat_data = [
             ('Men',        'men',        'categories/category_men_1773082495281.png'),
