@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.conf import settings
 
-from .models import Product, Category, Cart, CartItem, Order, OrderItem
+from .models import Product, Category, Cart, CartItem, Order, OrderItem, ContactInquiry
 from .forms import RegisterForm, CheckoutForm
 
 
@@ -206,9 +206,16 @@ def contact_view(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             
-            # Send Email
-            subject = f"AURIC Inquiry: {name}"
-            full_message = f"Inquiry from: {name} ({email})\n\nMessage:\n{message}"
+            # 1. Save to Database (Permanent Backup)
+            inquiry = ContactInquiry.objects.create(
+                name=name,
+                email=email,
+                message=message
+            )
+            
+            # 2. Attempt Email Notification
+            subject = f"NEW AURIC INQUIRY #{inquiry.id}: {name}"
+            full_message = f"Inquiry from: {name} ({email})\n\nMessage:\n{message}\n\n--- View in Admin: http://auric-luxuey-clothes.onrender.com/admin/store/contactinquiry/{inquiry.id}/"
             
             try:
                 send_mail(
@@ -218,12 +225,11 @@ def contact_view(request):
                     [settings.DEFAULT_FROM_EMAIL],
                     fail_silently=False,
                 )
-                messages.success(request, "Your inquiry has been sent! We'll be in touch soon.")
+                messages.success(request, "Your inquiry has been received! Our team will contact you soon.")
             except Exception as e:
-                # Fallback for production if email credentials fail or timeout
+                # Still show success because it SAVED to the DB
                 print(f"EMAIL ERROR: {e}")
-                # We still show a success/info message so the user isn't stuck on a 502
-                messages.info(request, "Your inquiry has been recorded. We will get back to you shortly.")
+                messages.success(request, "Message received! (Note: Direct email is delayed, but we have your inquiry in our archive.)")
                 
             return redirect('contact')
     else:
