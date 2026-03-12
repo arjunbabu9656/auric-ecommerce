@@ -8,19 +8,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('🚀 Starting Production Database Seed...'))
 
-        # ── Admin Reset (Emergency Hook) ──
-        from django.contrib.auth.models import User
-        u = User.objects.filter(username='arjunaju').first()
-        if u:
-            u.set_password('Auric@2026')
-            u.is_superuser = True
-            u.is_staff = True
-            u.save()
-            self.stdout.write(self.style.SUCCESS('  Admin: Password reset to Auric@2026'))
-        else:
-            User.objects.create_superuser('arjunaju', 'arjunb7025@gmail.com', 'Auric@2026')
-            self.stdout.write(self.style.SUCCESS('  Admin: Created superuser arjunaju with Auric@2026'))
-
         # ── Categories ──
         cat_data = [
             ('Men',        'men',        'categories/category_men_1773082495281.png'),
