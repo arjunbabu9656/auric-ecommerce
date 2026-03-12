@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
+from django.conf import settings
 
 from .models import Product, Category, Cart, CartItem, Order, OrderItem
 from .forms import RegisterForm, CheckoutForm
