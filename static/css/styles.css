@@ -1641,37 +1641,38 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 @media (max-width: 680px) {
   :root { --pad: 1.25rem; --sec: 4rem; }
   
-  .section-header { margin-bottom: 3.5rem; text-align: center; }
-  .heading-section { font-size: 2.8rem; }
+  .section-header { margin-bottom: 3rem; text-align: center; }
+  .heading-section { font-size: 2.5rem; }
   
   .products__grid,
   .product-grid { 
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: repeat(2, 1fr); 
     gap: 0.75rem; 
   }
-  @media (max-width: 360px) {
-    .products__grid, .product-grid { gap: 0.5rem; }
-  }
+}
+
+@media (max-width: 480px) {
+  :root { --pad: 1rem; --sec: 3.5rem; }
+  .heading-section { font-size: 2.1rem; }
+  .hero-title { font-size: 2.3rem; }
+
+  /* Auth */
+  .auth-section { padding-top: 80px; }
+  .auth-box { padding: 2rem 1.25rem; border-radius: var(--r-md); }
   
-  .p-card__info { padding: 1rem 0.65rem 1.1rem; }
-  .p-card__name { font-size: 0.8rem; }
-  .p-card__price { font-size: 0.85rem; }
+  /* Cart */
+  .cart-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .cart-item__info { width: 100%; }
+  .qty-selector { align-self: flex-start; }
   
-  .order-history__header { 
-    flex-direction: column; 
-    align-items: flex-start; 
-    gap: 1.5rem;
-  }
-  .order-history__header > div:first-child {
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
-  }
-  
-  .footer__top { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
-  .footer__brand { align-items: center; display: flex; flex-direction: column; }
-  .footer__bottom { flex-direction: column; gap: 2rem; align-items: center; text-align: center; }
-  
-  .auth-box { padding: 2.5rem 1.5rem; }
+  /* Contact */
+  .contact__grid { gap: 2.5rem !important; }
+  .contact__form { padding: 2rem 1.25rem !important; }
+  .contact__form form div { grid-template-columns: 1fr !important; }
+
+  /* Menu */
+  .mobile-nav__links { padding: 2rem 1.5rem; }
+  .mobile-nav__link { font-size: 1.5rem; margin-bottom: 1.25rem; }
 }
 
 /* NO animations on mobile for performance */
