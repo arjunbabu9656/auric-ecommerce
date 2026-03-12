@@ -42,8 +42,11 @@ def product_list(request):
     active_category = None
 
     if category_slug:
-        active_category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(category=active_category)
+        active_category = Category.objects.filter(slug=category_slug).first()
+        if active_category:
+            products = products.filter(category=active_category)
+        else:
+            messages.info(request, f'The collection "{category_slug.replace("-", " ").title()}" is coming soon. Showing our full archival range.')
 
     if search_query:
         products = products.filter(
