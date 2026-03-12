@@ -607,7 +607,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 
 .cats__head {
   padding: 0 var(--pad);
-  margin-bottom: 2rem;
+  margin-bottom: 3.5rem;
+  text-align: center;
 }
 
 /* Responsive grid */
@@ -1616,7 +1617,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   
   .editorial { grid-template-columns: 1fr; }
   .editorial__img { height: 75vw; min-height: 350px; }
-  .editorial__text { padding: 4rem var(--pad); text-align: center; align-items: center; }
+  .editorial__text { padding: 5rem var(--pad); text-align: center; align-items: center; }
 
   .desktop-only { display: none !important; }
   .btn-menu { display: flex; }
