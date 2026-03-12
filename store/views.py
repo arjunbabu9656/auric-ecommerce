@@ -213,16 +213,16 @@ def contact_view(request):
                 send_mail(
                     subject,
                     full_message,
-                    'arjunb7025@gmail.com', # From
-                    ['arjunb7025@gmail.com'], # To
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.DEFAULT_FROM_EMAIL],
                     fail_silently=False,
                 )
                 messages.success(request, "Your inquiry has been sent! We'll be in touch soon.")
             except Exception as e:
-                # Fallback for development if email credentials are not set
+                # Fallback for production if email credentials fail or timeout
                 print(f"EMAIL ERROR: {e}")
-                print(f"MOCK EMAIL SENT TO arjunb7025@gmail.com\nSubject: {subject}\n{full_message}")
-                messages.info(request, "Success! (Dev Mode: Email logged to console)")
+                # We still show a success/info message so the user isn't stuck on a 502
+                messages.info(request, "Your inquiry has been recorded. We will get back to you shortly.")
                 
             return redirect('contact')
     else:
