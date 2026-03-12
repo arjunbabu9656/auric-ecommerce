@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmed — AURIC{% endblock %}
+{% block content %}
+
+<section class="section orders-section" style="text-align: center;">
+    <div class="container">
+        <div style="max-width: 650px; margin: 0 auto;" class="reveal">
+            <span class="text-meta" style="color: var(--gold); font-weight: 800; letter-spacing: 0.25em;">Success</span>
+            <h1 class="heading-section mt-sm" style="margin-bottom: 1rem;">Order Confirmed.</h1>
+            <p class="text-editorial" style="font-size: 1.15rem;">Thank you, {{ order.full_name }}. Your curated selection is being prepared with care by our Motion team.</p>
+            <p class="mt-md" style="color: var(--muted); font-size: 0.85rem;">Reference: <strong>#{{ order.pk }}</strong> &nbsp;●&nbsp; A confirmation has been sent to <strong>{{ order.email }}</strong></p>
+
+            <div class="summary-card mt-xl" style="text-align: left; background: var(--bone); border: 1px solid var(--border);">
+                <span class="text-meta" style="font-size: 0.55rem; margin-bottom: 1.5rem; display: block;">Curated Summary</span>
+                
+                <div style="max-height: 300px; overflow-y: auto; margin-bottom: 1.5rem;">
+                    {% for item in order.items.all %}
+                    <div class="summary-row">
+                        <span>{{ item.product_name }} <span style="color: var(--muted); margin-left: 0.5rem;">× {{ item.quantity }}</span></span>
+                        <span style="font-weight: 700;">₹{{ item.subtotal }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="summary-row summary-row--total" style="border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 1.5rem;">
+                    <span>Total Paid</span>
+                    <span>₹{{ order.total_amount }}</span>
+                </div>
+            </div>
+
+            <div class="mt-xl reveal" style="display: flex; gap: 1.25rem; justify-content: center; transition-delay: 0.2s;">
+                <a href="{% url 'homepage' %}" class="btn">Back to Home</a>
+                <a href="{% url 'product_list' %}" class="btn btn--solid">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

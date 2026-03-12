@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Login — AURIC{% endblock %}
+{% block content %}
+
+<section class="section auth-section">
+    <div class="container">
+        <div class="auth-box reveal">
+            <span class="text-meta">Welcome back</span>
+            <h1 class="heading-section mt-sm" style="margin-bottom: 2rem;">Sign In</h1>
+            
+            <form method="post" class="mt-xl">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Your username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Your password" required>
+                </div>
+                <button type="submit" class="btn btn--solid mt-lg" style="width:100%; padding: 1rem;">Sign In</button>
+            </form>
+            
+            <p class="mt-md" style="text-align:center; color: var(--muted); font-size: 0.85rem;">
+                Don't have an account? <a href="{% url 'register' %}" class="nav__link" style="color: var(--dark); border-bottom: 1px solid var(--dark); padding-bottom: 2px;">Join AURIC</a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

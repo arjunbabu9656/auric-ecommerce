@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart — AURIC{% endblock %}
+{% block content %}
+
+<section class="section cart-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="text-meta">Your Selection</span>
+            <h1 class="heading-section">Shopping Cart</h1>
+        </div>
+
+        {% if cart.item_count > 0 %}
+        <div class="cart__layout">
+            <!-- Cart Items -->
+            <div class="cart__items">
+                {% for item in cart.items.all %}
+                <div class="cart-item reveal">
+                    <div class="cart-item__image">
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        {% else %}
+                        <div class="p-card__placeholder" style="height:100%;">{{ item.product.name|slice:':1' }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="cart-item__info">
+                        <span class="text-meta" style="font-size: 0.55rem;">{{ item.product.category.name }}</span>
+                        <h3>{{ item.product.name }}</h3>
+                        
+                        <div class="cart-item__controls mt-sm" style="display: flex; align-items: center; gap: 1.5rem;">
+                            <form method="post" action="{% url 'update_cart' item.pk %}" class="qty-form">
+                                {% csrf_token %}
+                                <button type="submit" name="quantity" value="{{ item.quantity|add:'-1' }}" class="qty-btn">−</button>
+                                <span class="qty-display">{{ item.quantity }}</span>
+                                <button type="submit" name="quantity" value="{{ item.quantity|add:'1' }}" class="qty-btn">+</button>
+                            </form>
+                            <a href="{% url 'remove_from_cart' item.pk %}" class="cart-item__remove">Remove</a>
+                        </div>
+                    </div>
+                    <div class="cart-item__price" style="font-weight: 800; font-size: 1rem;">
+                        ₹{{ item.subtotal }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Order Summary -->
+            <div class="summary-card reveal">
+                <h3 class="text-meta" style="margin-bottom: 1.5rem;">Order Summary</h3>
+                <div class="summary-row">
+                    <span style="color: var(--muted);">Subtotal ({{ cart.item_count }} items)</span>
+                    <span>₹{{ cart.total }}</span>
+                </div>
+                <div class="summary-row">
+                    <span style="color: var(--muted);">Shipping</span>
+                    <span>{% if cart.total >= 12000 %}<span style="color: #27ae60; font-weight: 700;">Complimentary</span>{% else %}Calculated at checkout{% endif %}</span>
+                </div>
+                <div class="summary-row summary-row--total">
+                    <span>Total</span>
+                    <span>₹{{ cart.total }}</span>
+                </div>
+                
+                <div class="mt-lg" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <a href="{% url 'checkout' %}" class="btn btn--solid" style="width:100%; text-align:center; padding: 1rem;">Proceed to Checkout</a>
+                    <a href="{% url 'product_list' %}" class="btn" style="width:100%; text-align:center; padding: 1rem; border-color: rgba(0,0,0,0.1);">Continue Shopping</a>
+                </div>
+                
+                <p class="mt-md" style="font-size: 0.65rem; color: var(--muted); text-align: center; line-height: 1.5;">
+                    Secure checkout powered by AURIC Motion Systems.
+                </p>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="empty-state reveal">
+            <p class="text-editorial" style="font-size: 1.25rem; margin-bottom: 1.5rem;">Your collection is currently empty.</p>
+            <a href="{% url 'product_list' %}" class="btn btn--solid">Explore Collection</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

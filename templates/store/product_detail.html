@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name }} — AURIC{% endblock %}
+{% block meta_desc %}{{ product.description|truncatechars:150 }}{% endblock %}
+
+{% block content %}
+<section class="section product-detail-section">
+    <div class="container">
+        <div class="product-detail__grid">
+
+            <!-- Image -->
+            <div class="product-detail__image-wrap reveal">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail__image">
+                {% else %}
+                <div class="p-card__placeholder" style="height: 70vh; display:flex; align-items:center; justify-content:center;">
+                    <span class="heading-section">{{ product.name }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Info -->
+            <div class="product-detail__info reveal" style="transition-delay: 0.1s;">
+                <span class="text-meta">{{ product.category.name }}</span>
+                <h1 class="heading-section mt-sm" style="margin-bottom: 1rem;">{{ product.name }}</h1>
+
+                <div class="product-detail__pricing">
+                    {% if product.is_on_sale %}
+                    <span class="product-detail__price">₹{{ product.sale_price }}</span>
+                    <span class="product-detail__price--orig">₹{{ product.price }}</span>
+                    {% else %}
+                    <span class="product-detail__price">₹{{ product.price }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="product-detail__desc">
+                    {{ product.description }}
+                </div>
+
+                <div class="product-detail__meta" style="margin-bottom: 2.5rem;">
+                    <span class="text-meta" style="color: var(--dark); font-weight: 800;">
+                        Stock Status: 
+                        {% if product.stock > 10 %}
+                        <span style="color: #27ae60;">In Stock</span>
+                        {% elif product.stock > 0 %}
+                        <span style="color: #f39c12;">Limited Stock ({{ product.stock }})</span>
+                        {% else %}
+                        <span style="color: #e74c3c;">Sold Out</span>
+                        {% endif %}
+                    </span>
+                </div>
+
+                {% if product.stock > 0 %}
+                <a href="{% url 'add_to_cart' product.pk %}" class="btn btn--solid" style="width: 100%; text-align: center; padding: 1.1rem;">
+                    Add to Cart — ₹{{ product.effective_price }}
+                </a>
+                {% else %}
+                <button class="btn btn--solid" style="width: 100%; text-align: center; opacity: 0.4; cursor: not-allowed;" disabled>Out of Stock</button>
+                {% endif %}
+
+                <div class="product-detail__feature-list">
+                    <div class="product-feature">Technical grade performance fabric</div>
+                    <div class="product-feature">Complimentary express shipping over ₹12,000</div>
+                    <div class="product-feature">30-day effortless returns & exchanges</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        {% if related %}
+        <div class="related-section reveal">
+            <span class="text-meta">Complete the look</span>
+            <h2 class="heading-section mt-sm" style="margin-bottom: 3rem;">You may also like</h2>
+            
+            <div class="product-grid">
+                {% for p in related %}
+                <div class="p-card reveal stagger-{{ forloop.counter }}">
+                    <div class="p-card__thumb">
+                        <a href="{% url 'product_detail' p.slug %}">
+                            {% if p.image %}
+                            <img src="{{ p.image.url }}" alt="{{ p.name }}" class="p-card__img" loading="lazy">
+                            {% else %}
+                            <div class="p-card__placeholder">{{ p.name }}</div>
+                            {% endif %}
+                        </a>
+                        <div class="p-card__overlay">
+                            <a href="{% url 'add_to_cart' p.pk %}" class="p-card__add">Add to Cart</a>
+                        </div>
+                    </div>
+                    <div class="p-card__body">
+                        <span class="p-card__cat">{{ p.category.name }}</span>
+                        <h3 class="p-card__name"><a href="{% url 'product_detail' p.slug %}">{{ p.name }}</a></h3>
+                        <div class="p-card__pricing">
+                            <span class="p-card__price">₹{{ p.effective_price }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AURIC — Defining Modern Luxury{% endblock %}
+
+{% block content %}
+
+<!-- ══════════════ HERO — Split Editorial ══════════════ -->
+<section class="hero-split">
+
+    <!-- LEFT: Dark text panel -->
+    <div class="hero-split__text">
+        <div class="hero-split__meta">
+            <span class="hero-split__label">SS26 — Volume 01</span>
+            <span class="hero-split__pill">New Arrivals</span>
+        </div>
+
+        <h1 class="hero-split__title">
+            WEAR<br>
+            <em>the</em><br>
+            MOMENT
+        </h1>
+
+        <p class="hero-split__desc">A collection engineered for those who move with uncompromising intent and quiet confidence.</p>
+
+        <div class="hero-split__ctas">
+            <a href="{% url 'product_list' %}" class="btn btn--light">Shop Collection</a>
+            <a href="#cats" class="btn btn--outline-light">Browse →</a>
+        </div>
+
+        <div class="hero-split__stats">
+            <div class="hero-split__stat">
+                <span class="hero-split__stat-val">80+</span>
+                <span class="hero-split__stat-key">Countries</span>
+            </div>
+            <div class="hero-split__divider"></div>
+            <div class="hero-split__stat">
+                <span class="hero-split__stat-val">Ltd.</span>
+                <span class="hero-split__stat-key">Edition</span>
+            </div>
+            <div class="hero-split__divider"></div>
+            <div class="hero-split__stat">
+                <span class="hero-split__stat-val">SS26</span>
+                <span class="hero-split__stat-key">Season</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT: Image panel -->
+    <div class="hero-split__media">
+        <div class="hero-split__img-wrap">
+            <img src="/media/categories/category_women_1773082512416.png"
+                 alt="AURIC SS26 Campaign"
+                 class="hero-split__img">
+        </div>
+        <!-- Floating card -->
+        <div class="hero-split__card">
+            <span class="hero-split__card-label">Now Live</span>
+            <p class="hero-split__card-title">SS26 Campaign</p>
+        </div>
+    </div>
+
+</section>
+
+
+
+<!-- ══════════════ MARQUEE ══════════════ -->
+<div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+        <span>Technical Fabric</span><span class="dot">◈</span>
+        <span>Limited Release</span><span class="dot">◈</span>
+        <span>Free Returns</span><span class="dot">◈</span>
+        <span>SS26 Now Live</span><span class="dot">◈</span>
+        <span>Global Shipping</span><span class="dot">◈</span>
+        <span>Quiet Luxury</span><span class="dot">◈</span>
+        <span>Technical Fabric</span><span class="dot">◈</span>
+        <span>Limited Release</span><span class="dot">◈</span>
+        <span>Free Returns</span><span class="dot">◈</span>
+        <span>SS26 Now Live</span><span class="dot">◈</span>
+        <span>Global Shipping</span><span class="dot">◈</span>
+        <span>Quiet Luxury</span><span class="dot">◈</span>
+    </div>
+</div>
+
+<!-- ══════════════ CATEGORIES ══════════════ -->
+<section class="cats" id="cats">
+    <div class="wrap">
+        <div class="cats__head reveal">
+            <span class="label" style="display:block; margin-bottom:0.5rem;">Explore curated categories</span>
+            <h2 class="section-title">Seasonal Essentials</h2>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="cats__grid">
+            {% for cat in categories %}
+            <a href="{% url 'product_list' %}?category={{ cat.slug }}"
+               class="cat-card {% if forloop.counter == 1 %}cat-card--lg{% endif %} reveal"
+               style="transition-delay:{{ forloop.counter0 }}00ms;">
+                {% if cat.image %}
+                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}" class="cat-card__img">
+                {% else %}
+                    <div class="cat-card__placeholder">{{ cat.name }}</div>
+                {% endif %}
+                <div class="cat-card__body">
+                    <h3 class="cat-card__name">{{ cat.name }}</h3>
+                    <span class="cat-card__cta">Shop Now</span>
+                </div>
+            </a>
+            {% empty %}
+            <!-- Fallback if no categories in DB -->
+            <a href="{% url 'product_list' %}" class="cat-card cat-card--lg reveal">
+                <img src="/media/categories/category_outerwear_1773082545977.png" alt="Technical Outerwear" class="cat-card__img">
+                <div class="cat-card__body">
+                    <h3 class="cat-card__name">Technical Outerwear</h3>
+                    <span class="cat-card__cta">Shop Now</span>
+                </div>
+            </a>
+            <a href="{% url 'product_list' %}" class="cat-card reveal" style="transition-delay:100ms;">
+                <img src="/media/categories/category_men_1773082495281.png" alt="Men's" class="cat-card__img">
+                <div class="cat-card__body">
+                    <h3 class="cat-card__name">Men's Collection</h3>
+                    <span class="cat-card__cta">Shop Now</span>
+                </div>
+            </a>
+            <a href="{% url 'product_list' %}" class="cat-card reveal" style="transition-delay:150ms;">
+                <img src="/media/categories/category_women_1773082512416.png" alt="Women's" class="cat-card__img">
+                <div class="cat-card__body">
+                    <h3 class="cat-card__name">Women's Collection</h3>
+                    <span class="cat-card__cta">Shop Now</span>
+                </div>
+            </a>
+            <a href="{% url 'product_list' %}" class="cat-card reveal" style="transition-delay:200ms;">
+                <img src="/media/categories/category_essentials_1773082528120.png" alt="Essentials" class="cat-card__img">
+                <div class="cat-card__body">
+                    <h3 class="cat-card__name">Essentials</h3>
+                    <span class="cat-card__cta">Shop Now</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ NEW ARRIVALS ══════════════ -->
+{% if featured_products %}
+<section class="products" id="shop">
+    <div class="wrap">
+        <div class="products__head reveal">
+            <div>
+                <span class="label" style="display:block; margin-bottom:0.5rem;">Shop the latest</span>
+                <h2 class="section-title">New Arrivals</h2>
+            </div>
+            <a href="{% url 'product_list' %}" class="nav__link desktop-only">View all →</a>
+        </div>
+
+        <div class="products__grid">
+            {% for product in featured_products %}
+            <div class="p-card reveal" style="transition-delay:{{ forloop.counter0 }}00ms;">
+                <!-- Thumbnail -->
+                <div class="p-card__thumb">
+                    <a href="{% url 'product_detail' product.slug %}">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="p-card__img" loading="lazy">
+                        {% else %}
+                        <div class="p-card__placeholder">{{ product.name|truncatechars:28 }}</div>
+                        {% endif %}
+                    </a>
+
+                    <!-- Hover overlay: Add to Cart button -->
+                    <div class="p-card__overlay">
+                        <a href="{% url 'product_detail' product.slug %}" class="p-card__overlay-link"></a>
+                        <a href="{% url 'add_to_cart' product.pk %}" class="p-card__add">+ Add to Cart</a>
+                    </div>
+
+                    {% if product.is_on_sale %}
+                    <span class="badge badge--sale">Sale</span>
+                    {% endif %}
+                </div>
+
+                <!-- Info -->
+                <div class="p-card__body">
+                    <span class="p-card__cat">{{ product.category.name }}</span>
+                    <h3 class="p-card__name">
+                        <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
+                    </h3>
+                    <div class="p-card__pricing">
+                        {% if product.is_on_sale %}
+                        <span class="p-card__price">₹{{ product.sale_price }}</span>
+                        <span class="p-card__price p-card__price--orig">₹{{ product.price }}</span>
+                        {% else %}
+                        <span class="p-card__price">₹{{ product.price }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Mobile: always show add to cart -->
+                <div class="p-card__add-mobile">
+                    <a href="{% url 'add_to_cart' product.pk %}" class="btn btn--solid btn--full" style="font-size:0.62rem; padding:0.7rem;">+ Add to Cart</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="reveal" style="text-align:center; margin-top:3rem;">
+            <a href="{% url 'product_list' %}" class="btn">See All Products →</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ══════════════ BRAND EDITORIAL ══════════════ -->
+<section class="editorial reveal">
+    <div class="editorial__text">
+        <span class="label">Behind the Label</span>
+        <h2 class="section-title">Craftsmanship<br>without<br>compromise.</h2>
+        <p class="editorial__desc">Every piece in our archive is the result of rigorous engineering and a deep respect for high-denier technical fabrics. We design silhouettes that hold their form while moving with you.</p>
+        <a href="{% url 'product_list' %}" class="btn btn--white mt3" style="align-self:flex-start;">Explore the Archive →</a>
+    </div>
+    <div class="editorial__img">
+        <img src="/media/categories/category_men_1773082495281.png" alt="AURIC Craftsmanship" loading="lazy">
+    </div>
+</section>
+
+<!-- ══════════════ VALUE PROPS ══════════════ -->
+<section class="props reveal">
+    <div class="wrap">
+        <div class="props__grid">
+            <div class="prop">
+                <span class="prop__icon">◈</span>
+                <h4 class="prop__title">Technical Fabric</h4>
+                <p class="prop__text">High-denier technical grade textiles built for durability and precision.</p>
+            </div>
+            <div class="prop">
+                <span class="prop__icon">◈</span>
+                <h4 class="prop__title">Limited Release</h4>
+                <p class="prop__text">Small batch production ensuring archival exclusivity on every drop.</p>
+            </div>
+            <div class="prop">
+                <span class="prop__icon">◈</span>
+                <h4 class="prop__title">Global Delivery</h4>
+                <p class="prop__text">Premium tracked shipping to over 80 territories worldwide.</p>
+            </div>
+            <div class="prop">
+                <span class="prop__icon">◈</span>
+                <h4 class="prop__title">Easy Returns</h4>
+                <p class="prop__text">Hassle-free 30-day returns managed with care on all orders.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

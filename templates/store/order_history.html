@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Order History — AURIC{% endblock %}
+{% block content %}
+
+<section class="section orders-section">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 4rem;">
+            <span class="text-meta">Account / History</span>
+            <h1 class="heading-section">My Orders</h1>
+        </div>
+
+        {% if orders %}
+        <div class="order-history reveal">
+            {% for order in orders %}
+            <div class="order-history__card">
+                <!-- Card Header -->
+                <div class="order-history__header">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; flex: 1;">
+                        <div>
+                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Reference</span>
+                            <span style="font-weight: 800; font-size: 1rem;">#{{ order.pk }}</span>
+                        </div>
+                        <div>
+                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Date Placed</span>
+                            <span style="font-weight: 600;">{{ order.created_at|date:"d M Y" }}</span>
+                        </div>
+                        <div>
+                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Order Total</span>
+                            <span style="font-weight: 800;">₹{{ order.total_amount }}</span>
+                        </div>
+                    </div>
+                    <span class="badge badge--{{ order.status }}">{{ order.get_status_display }}</span>
+                </div>
+
+                <!-- Card Items -->
+                <div class="order-history__items">
+                    {% for item in order.items.all %}
+                    <div class="order-item-row">
+                        <span style="font-weight: 600;">{{ item.product_name }} <span style="color: var(--muted); margin-left: 0.5rem; font-weight: 400;">× {{ item.quantity }}</span></span>
+                        <span style="font-weight: 700;">₹{{ item.subtotal }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Card Footer -->
+                <div class="order-history__footer">
+                    <span style="font-size: 0.72rem; color: var(--muted);">
+                        Shipping to: <strong style="color: var(--dark);">{{ order.address }}, {{ order.city }}</strong>
+                    </span>
+                    <button class="btn" style="font-size: 0.55rem; padding: 0.5rem 1rem; border-color: rgba(0,0,0,0.1);">Track Shipment</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="empty-state reveal">
+            <p class="text-editorial" style="font-size: 1.25rem; margin-bottom: 1.5rem;">No orders found in your history.</p>
+            <a href="{% url 'product_list' %}" class="btn btn--solid">Start Shopping</a>
+        </div>
+        {% endif %}
+
+        <div class="mt-xl reveal" style="display: flex; gap: 1.5rem; justify-content: center; border-top: 1px solid var(--border); padding-top: 3rem;">
+            <a href="{% url 'profile' %}" class="btn">← Back to Account</a>
+            <a href="{% url 'product_list' %}" class="btn btn--solid">Continue Shopping</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

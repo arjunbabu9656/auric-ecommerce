@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}My Account — AURIC{% endblock %}
+{% block content %}
+
+<section class="section profile-section">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 5rem;">
+            <span class="text-meta">A Private Statement</span>
+            <h1 class="heading-section mt-sm">My Account</h1>
+        </div>
+
+        <div class="cart__layout">
+            <!-- Orders Preview -->
+            <div class="reveal">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem;">
+                    <div>
+                        <span class="text-meta" style="color: var(--gold); font-size: 0.6rem;">Recent Acquisitions</span>
+                        <h3 class="text-meta" style="font-size: 1rem; color: var(--dark); margin-top: 0.5rem; letter-spacing: 0.05em;">Order History</h3>
+                    </div>
+                    <a href="{% url 'order_history' %}" class="nav__link" style="font-size: 0.65rem; color: var(--muted); transition: color 0.3s; border-bottom: 1px solid transparent;" onmouseover="this.style.color='var(--dark)'; this.style.borderColor='var(--dark)'" onmouseout="this.style.color='var(--muted)'; this.style.borderColor='transparent'">View All Activity →</a>
+                </div>
+
+                {% if orders %}
+                {% for order in orders %}
+                <div class="order-card">
+                    <div class="order-card__header">
+                        <div>
+                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Reference Number</span>
+                            <span style="font-weight: 800; font-size: 1rem; color: var(--dark);">#{{ order.pk }}</span>
+                        </div>
+                        <span class="badge badge--{{ order.status }}">{{ order.get_status_display }}</span>
+                    </div>
+                    <div class="order-card__items">
+                        {% for item in order.items.all %}
+                        <div class="order-item-row">
+                            <span style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                                {{ item.product_name }} 
+                                <span style="font-size: 0.75rem; color: var(--muted); font-weight: 400; padding: 0.1rem 0.4rem; background: var(--offwhite); border-radius: 4px;">{{ item.quantity }}</span>
+                            </span>
+                            <span style="font-weight: 800;">₹{{ item.subtotal }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="order-card__footer">
+                        <span class="text-meta" style="font-size: 0.65rem; font-weight: 600; color: var(--muted);">Acquired on {{ order.created_at|date:"M d, Y" }}</span>
+                        <div style="text-align: right;">
+                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block;">Final Total</span>
+                            <span style="font-weight: 950; font-size: 1.1rem; color: var(--dark);">₹{{ order.total_amount }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="empty-state" style="padding: 6rem 3rem;">
+                    <p class="text-editorial" style="font-size: 1.2rem; margin-bottom: 2rem;">Your archive is currently empty.</p>
+                    <a href="{% url 'product_list' %}" class="btn btn--solid">Explore the Collection</a>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Account Details -->
+            <div class="reveal" style="transition-delay: 0.15s;">
+                <div class="account-panel">
+                    <span class="account-panel__title">Member Profile</span>
+                    
+                    <div class="account-detail">
+                        <span class="account-detail__label">Registered Identity</span>
+                        <span class="account-detail__val">{{ user.get_full_name|default:user.username }}</span>
+                    </div>
+                    
+                    <div class="account-detail">
+                        <span class="account-detail__label">Electronic Mail</span>
+                        <span class="account-detail__val">{{ user.email }}</span>
+                    </div>
+                    
+                    <div class="account-detail">
+                        <span class="account-detail__label">Member Integration</span>
+                        <span class="account-detail__val">{{ user.date_joined|date:"F Y" }}</span>
+                    </div>
+                    
+                    <div class="mt-xl">
+                        <a href="{% url 'logout' %}" class="btn" style="width: 100%; text-align: center; border-color: var(--border); background: var(--offwhite); color: var(--dark); font-weight: 800;">Sign Out of AURIC</a>
+                    </div>
+                </div>
+                
+                <p class="mt-lg" style="text-align: center; font-size: 0.65rem; color: var(--muted); line-height: 1.6; padding: 0 1rem;">
+                    Your profile is part of the AURIC inner circle. <br> Need assistance? <a href="#" style="color: var(--dark); font-weight: 700; text-decoration: underline;">Contact Support</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
