@@ -1922,12 +1922,13 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   :root { --pad: 1.25rem; --sec: 4rem; }
   
   .section-header {
-  margin-bottom: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.5rem;
+  margin-bottom: 5rem;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  justify-content: center !important;
+  width: 100%;
 }
 .section-header > div { 
   display: flex;
