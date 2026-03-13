@@ -107,41 +107,62 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer section" style="border-top: 1px solid var(--border-light);">
+    <footer class="footer">
         <div class="container">
             <div class="footer__top">
                 <div class="footer__brand">
-                    <span class="logo">AURIC</span>
-                    <p class="mt-md">Defining modern luxury for the urban moment. Designed with precision. Worn with intent.</p>
+                    <a href="{% url 'homepage' %}" class="logo">AURIC</a>
+                    <p>Defining modern luxury for the urban moment. Precisely engineered silhouettes crafted with uncompromising intent.</p>
+                    
+                    <div class="footer__newsletter desktop-only">
+                        <span class="footer__title">Inquiries & Access</span>
+                        <div class="footer__input-wrap">
+                            <input type="email" placeholder="Email Address" class="footer__input">
+                            <button class="footer__submit">Join</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <span class="text-meta">Shop</span>
-                    <ul class="footer__links mt-md">
-                        <li><a href="{% url 'product_list' %}">All Products</a></li>
-                        <li><a href="{% url 'product_list' %}?category=men">Men</a></li>
-                        <li><a href="{% url 'product_list' %}?category=women">Women</a></li>
+
+                <div class="footer__col">
+                    <span class="footer__title">Collections</span>
+                    <ul class="footer__links">
+                        <li><a href="{% url 'product_list' %}">Shop All</a></li>
+                        <li><a href="{% url 'product_list' %}?category=men">Men's Archive</a></li>
+                        <li><a href="{% url 'product_list' %}?category=women">Women's Archive</a></li>
+                        <li><a href="{% url 'product_list' %}?category=essentials">Essentials</a></li>
                     </ul>
                 </div>
-                <div>
-                    <span class="text-meta">Brand</span>
-                    <ul class="footer__links mt-md">
+
+                <div class="footer__col">
+                    <span class="footer__title">Company</span>
+                    <ul class="footer__links">
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="#">About Auric</a></li>
+                        <li><a href="#">Stockists</a></li>
                         <li><a href="#">Journal</a></li>
-                        <li><a href="#">Fabrication</a></li>
-                        <li><a href="#">Sustainability</a></li>
                     </ul>
                 </div>
-                <div>
-                    <span class="text-meta">Assistance</span>
-                    <ul class="footer__links mt-md">
-                        <li><a href="{% url 'contact' %}">Contact</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
+
+                <div class="footer__col">
+                    <span class="footer__title">Assistance</span>
+                    <ul class="footer__links">
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer__bottom">
-                <span class="text-meta" style="font-size: 0.65rem;">&copy; 2026 Auric Label Ltd. All Rights Reserved.</span>
+                <div class="footer__legal">
+                    &copy; 2026 AURIC LABEL. ALL RIGHTS RESERVED.
+                </div>
+                <div class="footer__socials">
+                    <a href="#" class="footer__social-link">Instagram</a>
+                    <a href="#" class="footer__social-link">Twitter</a>
+                    <a href="#" class="footer__social-link">TikTok</a>
+                </div>
             </div>
         </div>
     </footer>
