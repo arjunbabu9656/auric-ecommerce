@@ -1715,7 +1715,14 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 @media (max-width: 680px) {
   :root { --pad: 1.25rem; --sec: 4rem; }
   
-  .section-header { margin-bottom: 3.5rem; text-align: center; width: 100%; max-width: none !important; }
+  .section-header {
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+  .section-header > div { flex: 1; }
   .heading-section { font-size: clamp(2.8rem, 10vw, 4rem); font-weight: 800; line-height: 1; }
   
   .products__grid,
@@ -1948,12 +1955,23 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   .cart-section .section-header, 
   .checkout-section .section-header, 
   .profile-section .section-header,
+  .product-list-section .section-header,
   .related-section { 
     text-align: center !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .section-header div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    text-align: center;
   }
 
   .heading-section { 
