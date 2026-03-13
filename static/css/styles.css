@@ -165,103 +165,116 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 .header--scrolled .btn-menu__bar { background: var(--dark); }
 
 /* ════════════════════════════════════
-   FOOTER: Premium Cool Polish
+   FOOTER: Premium Cool Redesign
    ════════════════════════════════════ */
 .footer {
   background: #080808;
   color: var(--white);
-  padding: 6rem 0 4rem;
+  padding: 8rem 0 4rem;
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-.footer__top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 4rem;
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 6rem;
 }
 
-.footer__brand {
-  margin-bottom: 2.5rem;
+.footer__col--brand {
+  padding-right: 4rem;
 }
 
-.footer__brand .logo {
+.footer__col--brand .logo {
   font-size: 2.2rem;
   letter-spacing: 0.4em;
   font-weight: 950;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   color: var(--white);
-  display: block;
-}
-
-.footer__tagline {
-  font-size: 0.65rem;
-  letter-spacing: 0.5em;
-  color: var(--gold);
-  font-weight: 900;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-
-.footer__nav {
-  margin-bottom: 3rem;
-  width: 100%;
-}
-
-.footer__nav-list {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  list-style: none;
-  padding: 0;
-}
-
-.footer__nav-link {
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
-  transition: all 0.4s var(--ease);
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-.footer__nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: all 0.4s var(--ease);
-  transform: translateX(-50%);
-}
-
-.footer__nav-link:hover {
-  color: var(--white);
-}
-
-.footer__nav-link:hover::after {
-  width: 100%;
+  display: inline-block;
 }
 
 .footer__desc {
   font-size: 0.9rem;
   line-height: 2;
   color: rgba(255,255,255,0.45);
-  max-width: 550px;
-  margin: 0 auto;
+  max-width: 400px;
   font-weight: 400;
+}
+
+.footer__title {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--white);
+  font-weight: 900;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+}
+
+.footer__list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer__list li {
+  margin-bottom: 1.25rem;
+}
+
+.footer__link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  transition: all 0.4s var(--ease);
+  position: relative;
+  display: inline-block;
+}
+
+.footer__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: all 0.4s var(--ease);
+}
+
+.footer__link:hover {
+  color: var(--white);
+  transform: translateX(4px);
+}
+
+.footer__link:hover::after {
+  width: 100%;
 }
 
 .footer__bottom {
   padding-top: 3rem;
   border-top: 1px solid rgba(255,255,255,0.05);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 2rem;
+}
+
+.social-link {
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+  transition: all 0.3s var(--ease);
+}
+
+.social-link:hover {
+  color: var(--gold);
+  transform: translateY(-2px);
 }
 
 .footer__legal {
@@ -272,8 +285,23 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   letter-spacing: 0.15em;
 }
 
+/* Responsive Polish: Pakka Mobile Footer */
+@media (max-width: 1024px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .footer__col--brand { grid-column: 1 / -1; padding-right: 0; text-align: center; margin-bottom: 2rem; }
+  .footer__desc { max-width: 600px; margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .footer { padding: 6rem 0 3rem; }
+  .footer__grid { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
+  .footer__title { margin-bottom: 1.5rem; }
+  .footer__bottom { flex-direction: column; gap: 2rem; text-align: center; }
+  .footer__link:hover { transform: translateY(-2px); }
+}
+
 /* ════════════════════════════════════
-   CHECKOUT: Luxury Overhaul
+   CHECKOUT: Luxury Overhaul (Restored)
    ════════════════════════════════════ */
 .checkout__grid {
   display: grid;
@@ -401,16 +429,12 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   letter-spacing: 0.1em;
 }
 
-/* Responsive Polish */
 @media (max-width: 900px) {
   .checkout__grid { grid-template-columns: 1fr; gap: 3rem; }
   .checkout__form-fields { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .footer { padding: 4rem 0 3rem; }
-  .footer__nav-list { flex-direction: column; gap: 1.5rem; align-items: center; }
-  .footer__brand .logo { font-size: 1.8rem; }
   .checkout__block { padding: 1.5rem; }
   .summary-card--premium { padding: 2rem; }
 }
