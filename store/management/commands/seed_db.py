@@ -50,6 +50,7 @@ class Command(BaseCommand):
             ('Heavyweight Core Hoodie', 'heavyweight-core-hoodie', 'essentials', 12000, None,  'products/product_hoodie_1773082418751.png', True),
             ('Technical Cargo Trouser', 'technical-cargo-trouser', 'essentials', 14500, 11000, 'products/product_pants_1773082436753.png', True),
             ('Oversized Blank Tee',     'oversized-blank-tee',     'essentials', 5500,  None,  'products/product_tee_1773082453469.png',   True),
+            ('Men Technical Jacket', 'men-technical-jacket', 'men', 3500, None , 'products/men_jacket.jpeg', True),
             
             # --- WOMEN LUXURY ---
             ('Technical Minimalist Dress', 'technical-minimalist-dress', 'women', 12500, None,  'products/dress_tech_black.png', True),
