@@ -1212,7 +1212,14 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 /* ════════════════════════════════════
    PRODUCT LIST + DETAIL
 ════════════════════════════════════ */
-.filter-bar { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.filter-bar { 
+  display: flex; 
+  gap: 0.45rem; 
+  flex-wrap: wrap; 
+  margin-bottom: 2.5rem; 
+  justify-content: center;
+}
+
 .filter-pill {
   padding: 0.45rem 1.1rem;
   font-size: 0.63rem; font-weight: 700;
@@ -1554,6 +1561,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   font-style: italic;
   line-height: 1;
   letter-spacing: -0.02em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .text-meta {
   font-size: 0.7rem;
@@ -1716,13 +1726,18 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   :root { --pad: 1.25rem; --sec: 4rem; }
   
   .section-header {
-    margin-bottom: 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 2rem;
-  }
-  .section-header > div { flex: 1; }
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+.section-header > div { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
   .heading-section { font-size: clamp(2.8rem, 10vw, 4rem); font-weight: 800; line-height: 1; }
   
   .products__grid,
