@@ -260,23 +260,6 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   text-align: center;
 }
 
-.footer__socials {
-  display: flex;
-  gap: 2rem;
-}
-
-.social-link {
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.3);
-  transition: all 0.3s var(--ease);
-}
-
-.social-link:hover {
-  color: var(--gold);
-  transform: translateY(-2px);
-}
 
 .footer__legal {
   font-size: 0.6rem;
