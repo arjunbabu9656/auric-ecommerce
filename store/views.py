@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,6 +11,11 @@ from .forms import RegisterForm, CheckoutForm
 
 
 # ──────────────────────────── helpers ────────────────────────────
+
+def ping(request):
+    """Keep-alive endpoint for Render Free Tier."""
+    return HttpResponse("pong", content_type="text/plain")
+
 
 def get_or_create_cart(request):
     """Return the cart for the current user or session."""
