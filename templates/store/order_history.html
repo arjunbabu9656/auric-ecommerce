@@ -15,18 +15,18 @@
             <div class="order-history__card">
                 <!-- Card Header -->
                 <div class="order-history__header">
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; flex: 1;">
-                        <div>
-                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Reference</span>
-                            <span style="font-weight: 800; font-size: 1rem;">#{{ order.pk }}</span>
+                    <div class="order-history__meta">
+                        <div class="meta-item">
+                            <span class="text-meta">Reference</span>
+                            <span class="meta-value">#{{ order.pk }}</span>
                         </div>
-                        <div>
-                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Date Placed</span>
-                            <span style="font-weight: 600;">{{ order.created_at|date:"d M Y" }}</span>
+                        <div class="meta-item">
+                            <span class="text-meta">Date Placed</span>
+                            <span class="meta-value">{{ order.created_at|date:"d M Y" }}</span>
                         </div>
-                        <div>
-                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Order Total</span>
-                            <span style="font-weight: 800;">₹{{ order.total_amount }}</span>
+                        <div class="meta-item">
+                            <span class="text-meta">Order Total</span>
+                            <span class="meta-value total-value">₹{{ order.total_amount }}</span>
                         </div>
                     </div>
                     <span class="badge badge--{{ order.status }}">{{ order.get_status_display }}</span>
