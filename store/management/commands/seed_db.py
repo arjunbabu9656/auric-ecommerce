@@ -50,7 +50,7 @@ class Command(BaseCommand):
             ('Heavyweight Core Hoodie', 'heavyweight-core-hoodie', 'essentials', 12000, None,  'products/product_hoodie_1773082418751.png', True),
             ('Technical Cargo Trouser', 'technical-cargo-trouser', 'essentials', 14500, 11000, 'products/product_pants_1773082436753.png', True),
             ('Oversized Blank Tee',     'oversized-blank-tee',     'essentials', 5500,  None,  'products/product_tee_1773082453469.png',   True),
-            ('Men Technical Jacket', 'men-technical-jacket', 'men', 3500, None , 'products/men_jacket.jpeg', True),
+            ('Men Technical Jacket',     'men-technical-jacket',       'essentials', 3500,  None, 'products/men_jacket.jpeg', True),
             
             # --- WOMEN LUXURY ---
             ('Technical Minimalist Dress', 'technical-minimalist-dress', 'women', 12500, None,  'products/dress_tech_black.png', True),
@@ -62,25 +62,27 @@ class Command(BaseCommand):
 
             # --- MEN LUXURY ---
             ('Technical Overshirt',      'technical-overshirt',        'men',    9800,  None, 'products/men_tech_overshirt_black.png', True),
-            ('Structured Technical Blazer','structured-technical-blazer','men', 22500,  None, 'products/men_blazer_charcoal.png', True),
+            ('Structured Technical Blazer','structured-technical-blazer','men', 2200,  None, 'products/men_blazer_charcoal.png', True),
             ('Tapered Technical Trouser','tapered-trouser',            'men',    8900,  None, 'products/men_trouser_sand.png', True),
             ('Minimalist Shell Parka',   'minimalist-shell-parka',     'men',   24900,  None, 'products/men_parka_navy.png', True),
+            ('Men OverTshirt',           'men-over-tshirt',            'men',    4500,  None, 'products/20251103_135258(1).jpg.jpeg', True),
         ]
 
         for name, slug, cat_slug, price, sale_price, img, featured in products_data:
-            p, created = Product.objects.get_or_create(slug=slug, defaults={
-                'name': name,
-                'category': cats[cat_slug],
-                'price': price,
-                'sale_price': sale_price,
-                'description': f'A premium AURIC archival piece. Engineered with technical-grade fabrics and architectural form. Designed for the modern urban environment.',
-                'is_featured': featured,
-                'stock': 50,
-            })
-            if created or not p.image:
-                p.image = img
-                p.save()
-            status = 'Created' if created else 'Exists'
+            p, created = Product.objects.update_or_create(
+                slug=slug, 
+                defaults={
+                    'name': name,
+                    'category': cats[cat_slug],
+                    'price': price,
+                    'sale_price': sale_price,
+                    'description': f'A premium AURIC archival piece. Engineered with technical-grade fabrics and architectural form. Designed for the modern urban environment.',
+                    'is_featured': featured,
+                    'stock': 50,
+                    'image': img
+                }
+            )
+            status = 'Created' if created else 'Updated'
             self.stdout.write(f'  Product: {name} ({status})')
 
         self.stdout.write(self.style.SUCCESS('✅ Database Seeded Successfully.'))
