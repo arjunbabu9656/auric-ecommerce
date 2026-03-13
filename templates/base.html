@@ -18,14 +18,24 @@
     <header class="header" id="mainHeader">
         <div class="container">
             <nav class="nav">
+                <!-- Mobile Menu Button -->
+                <button class="mobile-only btn-menu" id="menuToggle" aria-label="Open menu">
+                    <span class="btn-menu__bar"></span>
+                    <span class="btn-menu__bar btn-menu__bar--short"></span>
+                    <span class="btn-menu__bar"></span>
+                </button>
+
+                <!-- Desktop Nav Left -->
                 <div class="nav__links nav__links--left desktop-only">
                     <a href="{% url 'product_list' %}" class="nav__link">Shop</a>
                     <a href="{% url 'product_list' %}?category=men" class="nav__link">Men</a>
                     <a href="{% url 'product_list' %}?category=women" class="nav__link">Women</a>
                 </div>
 
+                <!-- Logo (Centered) -->
                 <a href="{% url 'homepage' %}" class="logo">AURIC</a>
 
+                <!-- Nav Right -->
                 <div class="nav__links nav__links--right">
                     <div class="desktop-only" style="display: flex; gap: 2rem;">
                         <a href="{% url 'product_list' %}" class="nav__link">Collections</a>
@@ -36,17 +46,11 @@
                             <a href="{% url 'login' %}" class="nav__link">Login</a>
                         {% endif %}
                     </div>
-                    <a href="{% url 'cart' %}" class="nav__link nav__link--cart" style="margin-left: 1.5rem; position: relative;">
+                    <a href="{% url 'cart' %}" class="nav__link nav__link--cart" id="cartToggle">
                         <span class="desktop-only">Cart</span>
                         <span class="cart-badge">{{ cart_count }}</span>
                     </a>
                 </div>
-
-                <button class="mobile-only btn-menu" id="menuToggle" aria-label="Open menu">
-                    <span class="btn-menu__bar"></span>
-                    <span class="btn-menu__bar btn-menu__bar--short"></span>
-                    <span class="btn-menu__bar"></span>
-                </button>
             </nav>
         </div>
     </header>
@@ -55,25 +59,25 @@
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
             <a href="{% url 'homepage' %}" class="logo">AURIC</a>
-            <button id="menuClose" class="mobile-nav__close">&times;</button>
+            <button id="menuClose" class="mobile-nav__close" aria-label="Close menu">&times;</button>
         </div>
         <nav class="mobile-nav__links">
-            <a href="{% url 'homepage' %}" class="mobile-nav__link">Home</a>
-            <a href="{% url 'product_list' %}" class="mobile-nav__link">Shop All</a>
-            <a href="{% url 'contact' %}" class="mobile-nav__link">Contact Us</a>
-            <div style="margin: 1.5rem 0; height: 1px; background: rgba(0,0,0,0.05);"></div>
-            <a href="{% url 'product_list' %}?category=men" class="mobile-nav__link">Men's Collection</a>
-            <a href="{% url 'product_list' %}?category=women" class="mobile-nav__link">Women's Collection</a>
-            <div style="margin: 1.5rem 0; height: 1px; background: rgba(0,0,0,0.05);"></div>
+            <a href="{% url 'homepage' %}" class="mobile-nav__link">HOME</a>
+            <a href="{% url 'product_list' %}" class="mobile-nav__link">SHOP ALL</a>
+            <a href="{% url 'contact' %}" class="mobile-nav__link">CONTACT US</a>
+            <div class="mobile-nav__divider"></div>
+            <a href="{% url 'product_list' %}?category=men" class="mobile-nav__link">MEN</a>
+            <a href="{% url 'product_list' %}?category=women" class="mobile-nav__link">WOMEN</a>
+            <div class="mobile-nav__divider"></div>
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' %}" class="mobile-nav__link">My Account</a>
-                <a href="{% url 'logout' %}" class="mobile-nav__link" style="color: #666; font-size: 0.8rem;">Sign Out</a>
+                <a href="{% url 'profile' %}" class="mobile-nav__link mobile-nav__link--account">MY ACCOUNT</a>
+                <a href="{% url 'logout' %}" class="mobile-nav__link-sm">Sign Out</a>
             {% else %}
-                <a href="{% url 'login' %}" class="mobile-nav__link">Sign In / Join</a>
+                <a href="{% url 'login' %}" class="mobile-nav__link mobile-nav__link--account">MY ACCOUNT</a>
             {% endif %}
         </nav>
         <div class="mobile-nav__footer">
-            <span class="text-meta" style="color: var(--gold);">Defining Modern Luxury</span>
+            <span class="text-meta">Defining Modern Luxury</span>
         </div>
     </div>
 
