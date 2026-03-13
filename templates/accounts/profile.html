@@ -12,12 +12,11 @@
         <div class="cart__layout">
             <!-- Orders Preview -->
             <div class="reveal">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
                     <div>
                         <span class="text-meta" style="color: var(--gold); font-size: 0.6rem;">Recent Acquisitions</span>
-                        <h3 class="text-meta" style="font-size: 1rem; color: var(--dark); margin-top: 0.5rem; letter-spacing: 0.05em;">Order History</h3>
+                        <h3 class="text-meta" style="font-size: 1rem; color: var(--dark); margin-top: 0.5rem; letter-spacing: 0.05em;">Order Activity</h3>
                     </div>
-                    <a href="{% url 'order_history' %}" class="nav__link" style="font-size: 0.65rem; color: var(--muted); transition: color 0.3s; border-bottom: 1px solid transparent;" onmouseover="this.style.color='var(--dark)'; this.style.borderColor='var(--dark)'" onmouseout="this.style.color='var(--muted)'; this.style.borderColor='transparent'">View All Activity →</a>
                 </div>
 
                 {% if orders %}

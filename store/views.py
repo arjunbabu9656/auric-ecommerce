@@ -189,12 +189,6 @@ def profile_view(request):
     return render(request, 'accounts/profile.html', {'orders': orders})
 
 
-@login_required
-def order_history_view(request):
-    orders = Order.objects.filter(user=request.user).prefetch_related('items')
-    return render(request, 'store/order_history.html', {'orders': orders})
-
-
 from django.core.mail import send_mail
 from .forms import ContactForm
 
