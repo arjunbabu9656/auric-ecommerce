@@ -26,7 +26,7 @@
                         <span class="text-meta" style="font-size: 0.55rem;">{{ item.product.category.name }}</span>
                         <h3>{{ item.product.name }}</h3>
                         
-                        <div class="cart-item__controls mt-sm" style="display: flex; align-items: center; gap: 1.5rem;">
+                        <div class="cart-item__controls mt-sm">
                             <form method="post" action="{% url 'update_cart' item.pk %}" class="qty-form">
                                 {% csrf_token %}
                                 <button type="submit" name="quantity" value="{{ item.quantity|add:'-1' }}" class="qty-btn">−</button>
@@ -36,7 +36,7 @@
                             <a href="{% url 'remove_from_cart' item.pk %}" class="cart-item__remove">Remove</a>
                         </div>
                     </div>
-                    <div class="cart-item__price" style="font-weight: 800; font-size: 1rem;">
+                    <div class="cart-item__price">
                         ₹{{ item.subtotal }}
                     </div>
                 </div>
@@ -45,7 +45,7 @@
 
             <!-- Order Summary -->
             <div class="summary-card reveal">
-                <h3 class="text-meta" style="margin-bottom: 1.5rem;">Order Summary</h3>
+                <h3 class="text-meta">Order Summary</h3>
                 <div class="summary-row">
                     <span style="color: var(--muted);">Subtotal ({{ cart.item_count }} items)</span>
                     <span>₹{{ cart.total }}</span>
@@ -59,9 +59,9 @@
                     <span>₹{{ cart.total }}</span>
                 </div>
                 
-                <div class="mt-lg" style="display: flex; flex-direction: column; gap: 0.75rem;">
-                    <a href="{% url 'checkout' %}" class="btn btn--solid" style="width:100%; text-align:center; padding: 1rem;">Proceed to Checkout</a>
-                    <a href="{% url 'product_list' %}" class="btn" style="width:100%; text-align:center; padding: 1rem; border-color: rgba(0,0,0,0.1);">Continue Shopping</a>
+                <div class="mt-lg cart-actions">
+                    <a href="{% url 'checkout' %}" class="btn btn--solid btn--full">Proceed to Checkout</a>
+                    <a href="{% url 'product_list' %}" class="btn btn--full btn--border-light">Continue Shopping</a>
                 </div>
                 
                 <p class="mt-md" style="font-size: 0.65rem; color: var(--muted); text-align: center; line-height: 1.5;">

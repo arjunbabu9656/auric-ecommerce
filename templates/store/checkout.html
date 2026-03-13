@@ -14,7 +14,7 @@
             <div class="checkout__form reveal">
                 <form method="post">
                     {% csrf_token %}
-                    <h3 class="text-meta" style="margin-bottom: 2rem; color: var(--dark);">Shipping Information</h3>
+                    <h3 class="text-meta">Shipping Information</h3>
                     
                     {% for field in form %}
                     <div class="form-group">
@@ -28,17 +28,17 @@
                     </div>
                     {% endfor %}
                     
-                    <button type="submit" class="btn btn--solid mt-lg" style="width:100%; padding: 1.1rem;">Place Order — ₹{{ cart.total }}</button>
+                    <button type="submit" class="btn btn--solid btn--full mt-lg">Place Order — ₹{{ cart.total }}</button>
                     
-                    <p class="mt-md" style="font-size: 0.65rem; color: var(--muted); text-align: center;">
+                    <p class="mt-md checkout-disclaimer">
                         By placing this order, you agree to our Terms of Service and Privacy Policy. All transactions are encrypted.
                     </p>
                 </form>
             </div>
 
             <!-- Order Summary Sidebar -->
-            <div class="summary-card reveal" style="transition-delay: 0.1s;">
-                <h3 class="text-meta" style="margin-bottom: 1.5rem;">Your Order</h3>
+            <div class="summary-card reveal">
+                <h3 class="text-meta">Your Order</h3>
                 <div style="max-height: 400px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
                     {% for item in cart.items.all %}
                     <div class="summary-row" style="gap: 1rem;">

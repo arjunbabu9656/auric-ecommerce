@@ -12,7 +12,7 @@
         <div class="cart__layout">
             <!-- Orders Preview -->
             <div class="reveal">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                <div class="order-activity-header">
                     <div>
                         <span class="text-meta" style="color: var(--gold); font-size: 0.6rem;">Recent Acquisitions</span>
                         <h3 class="text-meta" style="font-size: 1rem; color: var(--dark); margin-top: 0.5rem; letter-spacing: 0.05em;">Order Activity</h3>
@@ -23,28 +23,28 @@
                 {% for order in orders %}
                 <div class="order-card">
                     <div class="order-card__header">
-                        <div>
-                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block; margin-bottom: 0.25rem;">Reference Number</span>
-                            <span style="font-weight: 800; font-size: 1rem; color: var(--dark);">#{{ order.pk }}</span>
+                        <div class="order-ref">
+                            <span class="text-meta">Reference Number</span>
+                            <span class="order-id">#{{ order.pk }}</span>
                         </div>
                         <span class="badge badge--{{ order.status }}">{{ order.get_status_display }}</span>
                     </div>
                     <div class="order-card__items">
                         {% for item in order.items.all %}
                         <div class="order-item-row">
-                            <span style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="order-item-name">
                                 {{ item.product_name }} 
-                                <span style="font-size: 0.75rem; color: var(--muted); font-weight: 400; padding: 0.1rem 0.4rem; background: var(--offwhite); border-radius: 4px;">{{ item.quantity }}</span>
+                                <span class="order-item-qty">{{ item.quantity }}</span>
                             </span>
-                            <span style="font-weight: 800;">₹{{ item.subtotal }}</span>
+                            <span class="order-item-subtotal">₹{{ item.subtotal }}</span>
                         </div>
                         {% endfor %}
                     </div>
                     <div class="order-card__footer">
-                        <span class="text-meta" style="font-size: 0.65rem; font-weight: 600; color: var(--muted);">Acquired on {{ order.created_at|date:"M d, Y" }}</span>
-                        <div style="text-align: right;">
-                            <span class="text-meta" style="font-size: 0.55rem; color: var(--muted); display: block;">Final Total</span>
-                            <span style="font-weight: 950; font-size: 1.1rem; color: var(--dark);">₹{{ order.total_amount }}</span>
+                        <span class="text-meta order-date">Acquired on {{ order.created_at|date:"M d, Y" }}</span>
+                        <div class="order-total-group">
+                            <span class="text-meta">Final Total</span>
+                            <span class="order-total-val">₹{{ order.total_amount }}</span>
                         </div>
                     </div>
                 </div>
