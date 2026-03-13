@@ -155,64 +155,6 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
 }
 .header--scrolled .logo { color: var(--dark); }
 .header--scrolled .nav__link { color: var(--dark); }
-
-/* ════════════════════════════════════
-   FOOTER: Ultra-Minimalist Polish
-   ════════════════════════════════════ */
-.footer {
-  background: #080808;
-  color: var(--white);
-  padding: 4rem 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.footer__top {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.footer__brand .logo {
-  font-size: 1.8rem;
-  letter-spacing: 0.35em;
-  font-weight: 950;
-  display: block;
-  margin-bottom: 1.5rem;
-  color: var(--white);
-  text-align: center;
-}
-
-.footer__brand p.footer__desc {
-  font-size: 0.95rem;
-  line-height: 1.9;
-  color: rgba(255,255,255,0.5);
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 5px; /* User requested 5px padding */
-}
-
-/* Footer Bottom Bar */
-.footer__bottom {
-  padding-top: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer__legal {
-  font-size: 0.62rem;
-  color: rgba(255,255,255,0.3);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  text-align: center;
-}
-
-/* Responsive Footer Polish */
-@media (max-width: 480px) {
-  .footer { padding: 3rem 0; }
-  .footer__brand p.footer__desc { width: 90%; }
-}
 .header--scrolled .nav__link:hover { background: rgba(0,0,0,0.06); color: var(--dark); }
 .header--scrolled .nav__link--cart {
   background: var(--dark);
