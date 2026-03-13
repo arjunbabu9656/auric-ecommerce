@@ -109,14 +109,25 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer__top" style="text-align: center;">
+            <div class="footer__top">
                 <div class="footer__brand">
                     <a href="{% url 'homepage' %}" class="logo">AURIC</a>
-                    <p class="footer__desc">Defining modern luxury for the urban moment. Precisely engineered silhouettes crafted with uncompromising intent.</p>
+                    <p class="footer__tagline">DESIGNED WITH INTENT</p>
                 </div>
+                
+                <nav class="footer__nav">
+                    <ul class="footer__nav-list">
+                        <li><a href="{% url 'product_list' %}" class="footer__nav-link">SHOP</a></li>
+                        <li><a href="{% url 'contact' %}" class="footer__nav-link">CONTACT</a></li>
+                        <li><a href="#" class="footer__nav-link">ARCHIVE</a></li>
+                        <li><a href="#" class="footer__nav-link">LEGAL</a></li>
+                    </ul>
+                </nav>
+
+                <p class="footer__desc">Defining modern luxury for the urban moment. Precisely engineered silhouettes crafted with uncompromising intent.</p>
             </div>
 
-            <div class="footer__bottom" style="justify-content: center; border-top: none; padding-top: 1rem;">
+            <div class="footer__bottom">
                 <div class="footer__legal">
                     &copy; 2026 AURIC LABEL. ALL RIGHTS RESERVED.
                 </div>

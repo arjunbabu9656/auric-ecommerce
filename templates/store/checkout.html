@@ -3,68 +3,95 @@
 {% block content %}
 
 <section class="section checkout-section">
-    <div class="container">
+    <div class="container--narrow">
         <div class="section-header">
             <span class="text-meta">Final Step</span>
             <h1 class="heading-section">Checkout</h1>
         </div>
 
-        <div class="checkout__layout">
-            <!-- Form -->
-            <div class="checkout__form reveal">
-                <form method="post">
-                    {% csrf_token %}
-                    <h3 class="text-meta">Shipping Information</h3>
-                    
-                    {% for field in form %}
-                    <div class="form-group">
-                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {% if field.name == 'address' %}
-                            <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control" rows="3" placeholder="Street address, apartment, suite...">{{ field.value|default:'' }}</textarea>
-                        {% else %}
-                            <input type="{{ field.field.widget.input_type|default:'text' }}" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default:'' }}" class="form-control" placeholder="{{ field.label }}">
-                        {% endif %}
-                        {% if field.errors %}<span class="form-error">{{ field.errors.0 }}</span>{% endif %}
+        <div class="checkout__grid">
+            <!-- Left: Shipping & Method -->
+            <div class="checkout__main reveal">
+                <div class="checkout__block">
+                    <div class="checkout__block-header">
+                        <span class="step-number">01</span>
+                        <h3 class="text-meta">Shipping Information</h3>
                     </div>
-                    {% endfor %}
                     
-                    <button type="submit" class="btn btn--solid btn--full mt-lg">Place Order — ₹{{ cart.total }}</button>
-                    
-                    <p class="mt-md checkout-disclaimer">
-                        By placing this order, you agree to our Terms of Service and Privacy Policy. All transactions are encrypted.
-                    </p>
-                </form>
+                    <form method="post" id="checkout-form">
+                        {% csrf_token %}
+                        <div class="checkout__form-fields">
+                            {% for field in form %}
+                            <div class="form-group">
+                                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% if field.name == 'address' %}
+                                    <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control" rows="2" placeholder="Street address, apartment, suite...">{{ field.value|default:'' }}</textarea>
+                                {% else %}
+                                    <input type="{{ field.field.widget.input_type|default:'text' }}" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default:'' }}" class="form-control" placeholder="{{ field.label }}">
+                                {% endif %}
+                                {% if field.errors %}<span class="form-error">{{ field.errors.0 }}</span>{% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="checkout__block mt-xl">
+                            <div class="checkout__block-header">
+                                <span class="step-number">02</span>
+                                <h3 class="text-meta">Review & Finalize</h3>
+                            </div>
+                            <p class="checkout-disclaimer">
+                                All orders are processed securely. By proceeding, you agree to our <a href="#">Terms of Service</a>.
+                            </p>
+                            <button type="submit" class="btn btn--solid btn--full mt-md">Complete Purchase — ₹{{ cart.total }}</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            <!-- Order Summary Sidebar -->
-            <div class="summary-card reveal">
-                <h3 class="text-meta">Your Order</h3>
-                <div style="max-height: 400px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
-                    {% for item in cart.items.all %}
-                    <div class="summary-row" style="gap: 1rem;">
-                        <span style="flex: 1;">{{ item.product.name }} <span style="color: var(--muted); margin-left: 0.5rem;">× {{ item.quantity }}</span></span>
-                        <span style="font-weight: 700;">₹{{ item.subtotal }}</span>
+            <!-- Right: Summary Sidebar -->
+            <aside class="checkout__sidebar reveal">
+                <div class="summary-card summary-card--premium">
+                    <h3 class="text-meta">Order Summary</h3>
+                    
+                    <div class="summary__items">
+                        {% for item in cart.items.all %}
+                        <div class="summary__item">
+                            <div class="item__info">
+                                <span class="item__name">{{ item.product.name }}</span>
+                                <span class="item__qty">QTY: {{ item.quantity }}</span>
+                            </div>
+                            <span class="item__price">₹{{ item.subtotal }}</span>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
-                
-                <div class="summary-row" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1rem;">
-                    <span style="color: var(--muted);">Shipping</span>
-                    <span>{% if cart.total >= 12000 %}<span style="color: #27ae60; font-weight: 700;">Complimentary</span>{% else %}Calculated at next step{% endif %}</span>
-                </div>
-                
-                <div class="summary-row summary-row--total">
-                    <span>Total</span>
-                    <span>₹{{ cart.total }}</span>
-                </div>
-                
-                <div class="mt-lg" style="padding-top: 1rem; border-top: 1px dashed rgba(0,0,0,0.1);">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--muted); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                        Secure Checkout
+                    
+                    <div class="summary__totals">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>₹{{ cart.total }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>{% if cart.total >= 12000 %}<span style="color: var(--gold); font-weight: 700;">Complimentary</span>{% else %}Calculated next{% endif %}</span>
+                        </div>
+                        <div class="summary-row summary-row--grand-total">
+                            <span>Total</span>
+                            <span>₹{{ cart.total }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary__trust">
+                        <div class="trust-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <span>AES-256 Encrypted</span>
+                        </div>
+                        <div class="trust-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 11.08 11.14 22 4 14.86"></polyline><path d="M22 4L11.14 15.14 8 12"></path></svg>
+                            <span>Quality Guaranteed</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </aside>
         </div>
     </div>
 </section>
