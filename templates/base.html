@@ -61,23 +61,34 @@
             <a href="{% url 'homepage' %}" class="logo">AURIC</a>
             <button id="menuClose" class="mobile-nav__close" aria-label="Close menu">&times;</button>
         </div>
+        
         <nav class="mobile-nav__links">
+            <!-- Dedicated Account Section -->
+            <div class="mobile-nav__section" style="margin-bottom: 2.5rem;">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}" class="mobile-nav__link mobile-nav__link--account">MY ACCOUNT</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="mobile-nav__link mobile-nav__link--account">MY ACCOUNT</a>
+                {% endif %}
+            </div>
+
+            <span class="label" style="display: block; margin-bottom: 1rem; color: var(--gold);">Discover</span>
             <a href="{% url 'homepage' %}" class="mobile-nav__link">HOME</a>
             <a href="{% url 'product_list' %}" class="mobile-nav__link">SHOP ALL</a>
-            <a href="{% url 'contact' %}" class="mobile-nav__link">CONTACT US</a>
-            <div class="mobile-nav__divider"></div>
             <a href="{% url 'product_list' %}?category=men" class="mobile-nav__link">MEN</a>
             <a href="{% url 'product_list' %}?category=women" class="mobile-nav__link">WOMEN</a>
+            
             <div class="mobile-nav__divider"></div>
+            
+            <a href="{% url 'contact' %}" class="mobile-nav__link">CONTACT US</a>
+            
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' %}" class="mobile-nav__link mobile-nav__link--account">MY ACCOUNT</a>
-                <a href="{% url 'logout' %}" class="mobile-nav__link-sm">Sign Out</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="mobile-nav__link mobile-nav__link--account">MY ACCOUNT</a>
+                <a href="{% url 'logout' %}" class="mobile-nav__link-sm" style="margin-top: 2rem; display: block;">Sign Out</a>
             {% endif %}
         </nav>
+
         <div class="mobile-nav__footer">
-            <span class="text-meta">Defining Modern Luxury</span>
+            <span class="text-meta">Auric Label — Defining Modern Luxury</span>
         </div>
     </div>
 

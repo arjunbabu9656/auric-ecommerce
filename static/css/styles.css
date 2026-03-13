@@ -1778,19 +1778,21 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   /* Premium Mobile Menu Overlay */
   .mobile-nav {
     background: var(--white);
-    padding: 2rem var(--pad);
+    padding: 2.5rem var(--pad);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   }
   
   .mobile-nav__header {
     border: none;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
   }
   
   .mobile-nav__close {
     border-color: var(--border);
     font-size: 1.5rem;
+    width: 44px; height: 44px;
   }
 
   .mobile-nav__links {
@@ -1798,12 +1800,12 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
   }
   
   .mobile-nav__link {
-    font-family: var(--sans); /* Premium Sans-serif */
+    font-family: var(--sans);
     font-style: normal;
     font-weight: 800;
-    font-size: 1.75rem;
-    letter-spacing: -0.03em;
-    padding: 1.25rem 0;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    padding: 1.1rem 0;
     border-bottom: 1px solid var(--offwhite);
     text-transform: uppercase;
     color: var(--dark);
@@ -1811,39 +1813,25 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
     align-items: center;
     justify-content: space-between;
     opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(10px);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
   }
   
   .mobile-nav--active .mobile-nav__link {
     opacity: 1;
     transform: translateY(0);
   }
-  
-  /* Staggered Animations */
-  .mobile-nav__link:nth-child(1) { transition-delay: 0.1s; }
-  .mobile-nav__link:nth-child(2) { transition-delay: 0.15s; }
-  .mobile-nav__link:nth-child(3) { transition-delay: 0.2s; }
-  .mobile-nav__link:nth-child(5) { transition-delay: 0.25s; }
-  .mobile-nav__link:nth-child(6) { transition-delay: 0.3s; }
-  .mobile-nav__link:nth-child(8) { transition-delay: 0.35s; }
 
   .mobile-nav__link--account {
-    color: var(--gold);
-    margin-top: 1rem;
-    border-bottom: none;
+    font-size: 2rem; /* Larger and bolder */
+    color: var(--dark);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   
   .mobile-nav__divider {
-    height: 4rem;
-    display: flex;
-    align-items: center;
-  }
-  .mobile-nav__divider::after {
-    content: '';
-    width: 30px;
-    height: 2px;
-    background: var(--gold);
+    height: 3rem;
   }
 
   .mobile-nav__link-sm {
@@ -1852,7 +1840,6 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--muted);
-    margin-top: 1rem;
   }
 
   /* Auth / Cart / Contact */
